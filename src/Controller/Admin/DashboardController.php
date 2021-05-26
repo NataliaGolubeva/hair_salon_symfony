@@ -2,8 +2,10 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Calendar;
 use App\Entity\Category;
 use App\Entity\ServiceList;
+use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -36,8 +38,13 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::section('Dashboard', 'fa fa-home');
+        yield MenuItem::linkToCrud('User', 'fas fa-user', User::class);
+
         yield MenuItem::linkToCrud('Category', 'fas fa-star', Category::class);
         yield MenuItem::linkToCrud('Service List', 'fas fa-list', ServiceList::class);
+        yield MenuItem::linkToCrud('Calendar', 'fas fa-calendar', Calendar::class);
+
+
 
     }
 }
