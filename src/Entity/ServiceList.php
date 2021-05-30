@@ -50,9 +50,15 @@ class ServiceList
      */
     private $orders;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Gallery::class, mappedBy="service")
+     */
+    private $galleries;
+
     public function __construct()
     {
         $this->orders = new ArrayCollection();
+        $this->galleries = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -148,5 +154,38 @@ class ServiceList
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Gallery[]
+     */
+    public function getGalleries(): Collection
+    {
+        return $this->galleries;
+    }
+
+    public function addGallery(Gallery $gallery): self
+    {
+        if (!$this->galleries->contains($gallery)) {
+            $this->galleries[] = $gallery;
+            $gallery->setService($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGallery(Gallery $gallery): self
+    {
+        if ($this->galleries->removeElement($gallery)) {
+            // set the owning side to null (unless already changed)
+            if ($gallery->getService() === $this) {
+                $gallery->setService(null);
+            }
+        }
+
+        return $this;
+    }
+    public function __toString(){
+        return $this->title;
     }
 }

@@ -23,3 +23,4 @@ class CategoryCrudController extends AbstractCrudController
     }
     */
 }
+

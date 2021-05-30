@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Calendar;
 use App\Entity\Category;
+use App\Entity\Gallery;
 use App\Entity\ServiceList;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -46,6 +47,14 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::section('Appointments', 'far fa-address-card');
         yield MenuItem::linkToCrud('Calendar', 'fas fa-calendar-alt', Calendar::class);
+
+        yield MenuItem::section('Gallery', 'fas fa-photo-video');
+        yield MenuItem::linkToCrud('My works', 'fas fa-image', Gallery::class);
+
+
+
+
+
 
 
 
