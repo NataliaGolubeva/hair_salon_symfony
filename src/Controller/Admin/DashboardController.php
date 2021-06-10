@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Blog;
 use App\Entity\Calendar;
 use App\Entity\Category;
 use App\Entity\Gallery;
@@ -50,6 +51,13 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::section('Gallery', 'fas fa-photo-video');
         yield MenuItem::linkToCrud('My works', 'fas fa-image', Gallery::class);
+
+        yield MenuItem::section('Blog', 'fab fa-blogger-b');
+        yield MenuItem::linkToCrud('My posts', 'far fa-comment-alt', Blog::class);
+
+        yield MenuItem::linkToLogout('Logout', 'fa fa-exit');
+
+
 
 
 

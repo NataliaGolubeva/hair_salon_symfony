@@ -18,7 +18,7 @@
 
     {% endif %}
     {% if not app.user %}
-        <p>Please login</p>
+        <a href="{{ path('app_login') }}">Login</a>
 
     {% endif %}
 

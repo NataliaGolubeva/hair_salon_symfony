@@ -30,7 +30,7 @@ class GalleryCrudController extends AbstractCrudController
             TextEditorField::new('description'),
             DateTimeField::new('created_at'),
             ImageField::new('image')
-                ->setBasePath('images/myWorks')
+                ->setBasePath('system/public/images/myWorks')
                 ->setUploadDir('public/images/myWorks')
                 ->setUploadedFileNamePattern('[randomhash].[extension]')
                 ->setRequired(false)

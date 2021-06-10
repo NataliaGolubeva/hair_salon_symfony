@@ -44,6 +44,7 @@ class CustomerController extends AbstractController
         $name = $request->get('name');
         $lastname = $request->get('lastName');
         $email = $request->get('email');
+        $phoneNumber = $request->get('phoneNumber');
         $password = $request->get('password');
 
         $user = $this->userRepository->findOneBy([
@@ -59,6 +60,7 @@ class CustomerController extends AbstractController
         $user->setName($name);
         $user->setLastName(($lastname));
         $user->setEmail($email);
+        $user->setPhoneNumber($phoneNumber);
         $user->setPassword(
             $this->passwordEncoder->encodePassword($user, $password)
         );

@@ -41,6 +41,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     $user->setName($data->name);
     $user->setLastName($data->lastname);
     $user->setEmail($data->email);
+    $user->setPhoneNumber($data->phoneNumber);
 
 
     $this->_em->persist($user);
