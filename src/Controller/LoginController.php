@@ -14,21 +14,13 @@ class LoginController extends AbstractController
      * @Route("/api/login", name="app_json_login", methods={"POST"})
      */
     public function login(Request $request): \Symfony\Component\HttpFoundation\JsonResponse
-
         {
-            return $this->json([
-
-                    'user' => $this->getUser() ? $this->getUser()->getId() : null
-                ]
-            );
+            $user = $this->getUser();
+             return  $this->json([
+                 $user?
+                    ['id' => $user->getId(),
+                    'username' => $user->getUsername(),
+                    'name' => $user->getName()] : null
+                ]);
         }
-       # $user = $this->getUser();
-
-       # return $this->json([
-            #'username' => $user->getUsername(),
-          #  'roles' => $user->getRoles(),
-          #  'name' => $user->getName()
-      #  ]);
-
-
 }
