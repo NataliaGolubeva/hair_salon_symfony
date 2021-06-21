@@ -2,15 +2,18 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ServiceListRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource()
  * @ORM\Entity(repositoryClass=ServiceListRepository::class)
+
  */
 class ServiceList
 {
@@ -55,10 +58,16 @@ class ServiceList
      */
     private $galleries;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Booking::class, mappedBy="service")
+     */
+    private $bookings;
+
     public function __construct()
     {
         $this->orders = new ArrayCollection();
         $this->galleries = new ArrayCollection();
+        $this->bookings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -187,5 +196,35 @@ class ServiceList
     }
     public function __toString(){
         return $this->title;
+    }
+
+    /**
+     * @return Collection|Booking[]
+     */
+    public function getBookings(): Collection
+    {
+        return $this->bookings;
+    }
+
+    public function addBooking(Booking $booking): self
+    {
+        if (!$this->bookings->contains($booking)) {
+            $this->bookings[] = $booking;
+            $booking->setService($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBooking(Booking $booking): self
+    {
+        if ($this->bookings->removeElement($booking)) {
+            // set the owning side to null (unless already changed)
+            if ($booking->getService() === $this) {
+                $booking->setService(null);
+            }
+        }
+
+        return $this;
     }
 }

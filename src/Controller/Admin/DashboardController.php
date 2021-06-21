@@ -3,7 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Blog;
-use App\Entity\Calendar;
+
+use App\Entity\Booking;
 use App\Entity\Category;
 use App\Entity\Gallery;
 use App\Entity\ServiceList;
@@ -33,13 +34,16 @@ class DashboardController extends AbstractDashboardController
 
     public function configureDashboard(): Dashboard
     {
+        // set title for dashboard
         return Dashboard::new()
             ->setTitle('Hair salon');
     }
 
     public function configureMenuItems(): iterable
     {
+        // set section
         yield MenuItem::section('Customers', 'fa fa-users');
+        // set item in the section with name and icon
         yield MenuItem::linkToCrud('List of Clients', 'fas fa-user', User::class);
 
         yield MenuItem::section('Services', 'fas fa-store');
@@ -47,7 +51,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Service List', 'fas fa-list', ServiceList::class);
 
         yield MenuItem::section('Appointments', 'far fa-address-card');
-        yield MenuItem::linkToCrud('Calendar', 'fas fa-calendar-alt', Calendar::class);
+        yield MenuItem::linkToCrud('Booking', 'fas fa-image', Booking::class);
+
 
         yield MenuItem::section('Gallery', 'fas fa-photo-video');
         yield MenuItem::linkToCrud('My works', 'fas fa-image', Gallery::class);
@@ -55,6 +60,9 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Blog', 'fab fa-blogger-b');
         yield MenuItem::linkToCrud('My posts', 'far fa-comment-alt', Blog::class);
 
+        // add link to home
+        yield MenuItem::linkToRoute('Home', 'fa fa-home', 'home');
+        //add link to logout
         yield MenuItem::linkToLogout('Logout', 'fa fa-exit');
 
 

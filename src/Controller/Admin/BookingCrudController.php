@@ -1,15 +1,16 @@
 <?php
+// php bin/console make:admin:crud
 
 namespace App\Controller\Admin;
 
-use App\Entity\Calendar;
+use App\Entity\Booking;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
-class CalendarCrudController extends AbstractCrudController
+class BookingCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Calendar::class;
+        return Booking::class;
     }
 
     /*

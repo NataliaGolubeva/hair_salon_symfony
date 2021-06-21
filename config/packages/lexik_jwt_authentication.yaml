@@ -3,3 +3,6 @@ lexik_jwt_authentication:
     public_key: '%env(resolve:JWT_PUBLIC_KEY)%'
     pass_phrase: 'happytoken'
     token_ttl:   86400
+    user_identity_field: id
+
+

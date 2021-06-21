@@ -19,22 +19,21 @@ class ServiceListRepository extends ServiceEntityRepository
         parent::__construct($registry, ServiceList::class);
     }
 
-    // /**
-    //  * @return ServiceList[] Returns an array of ServiceList objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param $category
+     * @return ServiceList[] Returns an array of ServiceList objects
+     */
+
+    public function findService():array
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
+        return $this->createQueryBuilder('a')
+            ->innerJoin('c.phones', 'p', 'WITH', 'p.phone = :phone')
+            ->orderBy('a.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?ServiceList

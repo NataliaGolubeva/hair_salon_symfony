@@ -14,10 +14,12 @@ class RegistrationController extends AbstractController
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
+        // create new user
         $user = new User();
-//        $address = new Address();
+      // create form
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
+        // set condition
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $user->setPassword(
@@ -26,9 +28,10 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
+            // connect to the database and post request
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
-//            $entityManager->persist($user->getAddress());
+//
             $entityManager->flush();
             // do anything else you need here, like send an email
             return $this->redirectToRoute('app_login');
